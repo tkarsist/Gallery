@@ -1,0 +1,233 @@
+<?php
+	include_once ('config_img_mgt.php');
+	require_once ($ldap_login_file);
+
+
+if (!isset($_SESSION['hiiripippeli'])){
+	die();
+}
+include_once('vertailu_get.php');
+include_once('vertailu_post.php');
+?>
+<HTML>
+<head>
+<script language="JavaScript" type="text/JavaScript">
+<!--
+function MM_openBrWindow(theURL,winName,features) { //v2.0
+  window.open(theURL,winName,features);
+  return false;
+}
+//-->
+</script>
+<title></title>
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<BODY>
+
+<script language="javascript" type="text/javascript">
+function getElementsByStyleClass (className) {
+  var all = document.all ? document.all :
+    document.getElementsByTagName('*');
+  var elements = new Array();
+  for (var e = 0; e < all.length; e++){
+    if (all[e].className == className){
+      elements[elements.length] = all[e];}
+}
+  return elements;
+}
+
+</script>
+<script type="text/javascript">
+    
+   function getElements(find, replace, class1, class2){
+    	
+    	//change element name
+    	var x=document.getElementsByTagName('*');
+    	for (var v=0; v<x.length;v++){
+    		if (x[v].name==find){
+    			x[v].name=replace;
+    	
+    		}
+    		if (x[v].className==class1){
+    			x[v].className=class2;
+    	
+    		}
+    	}
+    	//var x=document.getElementsByName(find);
+        //while (x.length>=1){
+        //x[0].name=replace;
+        //}
+        //change style 
+        // var y=getElementsByStyleClass(class1);
+        // for(var z=0; z<y.length;z++){
+        //   	y[z].className=class2;
+		//}
+    }
+    
+    
+</script>
+
+<script type="text/javascript" language="javascript">
+function toggleStylishCheckbox(id, value, classOn, classOff) {
+		if (document.getElementById(id+"_val").name == "kuvat[]") {
+			document.getElementById(id+"_val").name = "foo";
+			document.getElementById(id).className = classOff;
+		} else {
+			document.getElementById(id+"_val").name = "kuvat[]";
+			document.getElementById(id).className = classOn;
+		}
+	}
+
+</script>
+
+<?php
+include ('image_over.php');
+//include ('valmis_post.php');
+
+?>
+
+<table border="2" width="80%" align="center">
+	<tr>
+		<td valign="middle" bgcolor="#8bb86b"><br>
+		<a href="vertailu.php">P‰ivit‰ </a><br>
+		<a href="album_mgt.php"
+			onclick="MM_openBrWindow('album_mgt.php','','width=500,height=700');return false">Albumien
+		hallinta</a><br>
+		<a href="
+		<?php 
+		include_once('config_img_mgt.php');
+		echo $kuvien_valinta_url;
+		 ?>" onclick="MM_openBrWindow('<?php echo $kuvien_valinta_url; ?>','','width=500,height=600');return false">
+		Tuo	uusia kuvia</a><br>
+		<a href="aloita.php">Advanced Search</a></td>
+		<td align="right" bgcolor="#8bb86b">
+		<form name="alb_filt_form" method="get" action="vertailu.php">Albumi-filtteri:
+		<select name="alb_filt" onchange="document.alb_filt_form.submit()">
+			
+		<?php
+			include_once ('config_img_mgt.php');
+			include_once ($db_functions_file);
+		$albumit=listAllOwnAlbums($_SESSION['hiiripippeli']);
+		if(isset($albumit)){
+			foreach($albumit as $key => $nimi){
+				echo '<option';
+				if($_SESSION['alb_filter']==$nimi){
+					echo " selected";}
+					echo ' value="'.$nimi.'" >'.$nimi."</option>";
+					//$arvo=getImageAttributeV($_SESSION['current_image'],$nimi);
+					//echo $nimi." : ".$arvo."<br>";
+					//echo $nimi."<br>";
+			}
+		}
+		?>
+			<option
+			<?php if($_SESSION['alb_filter']=="All"||!isset($_SESSION['alb_filter'])){echo " selected ";} ?>
+				value="All">Kaikki</option>
+			<option
+			<?php if($_SESSION['alb_filter']=="NotInAlb"){echo " selected ";} ?>
+				value="NotInAlb">Ei miss‰‰n albumissa</option>
+		</select></form>
+		<form name="rating_filt_form" method="get" action="vertailu.php">Arvosana-filtteri:
+		<select name="rating" onchange="document.rating_filt_form.submit()">
+			
+			<option
+			<?php if(isset($_SESSION['rating_check']) && $_SESSION['rating_check']=="1"){echo " selected ";} ?>
+				value="1">1</option>
+			<option
+			<?php if(isset($_SESSION['rating_check']) && $_SESSION['rating_check']=="2"){echo " selected ";} ?>
+				value="2">2</option>
+			<option
+			<?php if(isset($_SESSION['rating_check']) && $_SESSION['rating_check']=="3"){echo " selected ";} ?>
+				value="3">3</option>
+			<option
+			<?php if(isset($_SESSION['rating_check']) && $_SESSION['rating_check']=="4"){echo " selected ";} ?>
+				value="4">4</option>
+			<option
+			<?php if(isset($_SESSION['rating_check']) && $_SESSION['rating_check']=="5"){echo " selected ";} ?>
+				value="5">5</option>
+			<option
+			<?php if(isset($_SESSION['rating_check']) && $_SESSION['rating_check']=="null"){echo " selected ";} ?>
+				value="null">Ei arvosanaa</option>
+			<option
+			<?php if(!isset($_SESSION['rating_check']) || $_SESSION['rating_check']=="XXX"){echo " selected ";} ?>
+				value="XXX">Kaikki arvosanat</option>
+		</select></form>
+		</td>
+	</tr>
+</table>
+<form name="kuva_form" action="vertailu.php" method="post">
+<table border="2" width="80%" align="center">
+	<tr>
+		<td valign="middle" bgcolor="#8bb86b">
+		<?php 
+		
+		if (!isset($_SESSION['alb_filter']) || $_SESSION['alb_filter']=="NotInAlb" || $_SESSION['alb_filter']=="All"){
+			echo "Lis‰‰ valitut albumiin: "."\n";
+			echo '<select name="kuva_select" onchange="document.kuva_form.submit()">';
+			echo '<option selected value=""></option>';
+
+			include_once ('config_img_mgt.php');
+		include_once ($db_functions_file);
+			$albumit=listAllOwnAlbums($_SESSION['hiiripippeli']);
+			if(isset($albumit)){
+				foreach($albumit as $key => $nimi){
+					echo '<option value="'.$nimi.'" >'.$nimi."</option>";
+					
+				}
+				echo '</select>';
+			}
+		}
+		else{
+			echo '<input type="submit" name="rem_img_alb" value="Poista valitut albumista">'."\n";
+		}
+				
+			
+			
+		
+		
+			?> 
+		<input type="hidden" name="ref" value="vertailu.php"> 
+<input type="submit" name="nappi" value="Vertaa"> 
+<input type="submit" name="rem_view" value="Poista n‰kym‰st‰">
+<input type="submit" name="poisto" value="Poista Kokonaan"> Select:
+<a href="#" onclick="getElements('foo','kuvat[]', 'unchecked', 'checked');">All</a>,
+<a href="#" onclick="getElements('kuvat[]', 'foo', 'checked','unchecked');">None</a>
+
+		</td>
+	</tr>
+	<tr>
+		<td><br>
+		<div>
+		<ul class="images">
+<?php
+
+		foreach($_SESSION['kuva_taulu'] as $key => $nimi){
+
+			echo '<li><div><a href="detailed_vertailu.php?kuva='.$nimi.'"><img src="'.$location."thumb"."/".$nimi.'.thumb.jpg"></a><br/>'."\n";
+			echo '<script type="text/javascript" language="javascript">';
+			echo 'document.write('."'".'<a id="'.$nimi.'" href="#" onclick="toggleStylishCheckbox'."(\'";
+			echo $nimi."\', \'".$nimi."\', \'checked\', \'unchecked\');return false;".'" class="unchecked"></a>'."');";
+			echo 'document.write('."'".'<input type="hidden" name="foo" id="'.$nimi.'_val" value="'.$nimi.'" />'."')";
+			echo '</script></li>';
+			
+			
+		}
+
+?>
+		</ul>
+		</div>
+		</td>
+	</tr>
+
+
+</table>
+</form>
+</body>
+</html>
+
+<?php
+if (isset($_POST['valitut'])|| isset($_POST['poisto'])) {
+	die();
+}
+ ?>
+

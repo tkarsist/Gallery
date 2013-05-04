@@ -1,0 +1,12 @@
+#Sun Aug 17 12:01:06 EEST 2008
+Create\ Empty\ Directories=true
+Password=sup3rp0w3rS%&/
+Recurse\ Subdirectories=true
+Save\ Password=true
+Site\ Root=/gallery/image_gallery_packet/
+Username=root
+eclipse.preferences.version=1
+port=22
+protocol=0
+server=84.20.130.19
+timeout=30

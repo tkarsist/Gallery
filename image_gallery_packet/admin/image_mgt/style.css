@@ -1,0 +1,83 @@
+.checked {
+ background: url(valittu.png) no-repeat center;
+ /*background-color: green;*/
+ display: inline-block;
+ text-decoration: none;
+ padding:10px 0px 10px 0px;
+ padding-left: 100%;
+
+}
+.unchecked {
+ background: url(valitse.png) no-repeat center;
+ /*background-color: silver;*/
+ display: inline-block;
+ text-decoration: none;
+ padding:10px 0px 10px 0px;
+ padding-left: 100%;
+
+}
+
+ul.images {
+margin:0;
+margin-top: 15px;
+padding:0;
+list-style:none;
+line-height:1.4em;
+}
+
+.images li {
+display:block;
+float:left;
+margin:0 15px 15px 0px;
+padding:0;
+width: auto;
+height: auto;
+}
+
+#rateStatus{float:left; clear:both; width:100%; height:20px;}
+#rateMe{padding:0px; margin:0px;}
+#rateMe li{float:left;list-style:none;}
+#rateMe li a:hover,
+#rateMe .on{background:url(star_on.gif) no-repeat;}
+#rateMe a{float:left;background:url(star_off.gif) no-repeat;width:20px; height:20px;}
+#ratingSaved{display:none;}
+.saved{color:red; }
+
+div.img
+{
+  margin: 10px;
+
+  
+  height: auto;
+  width: auto;
+  /*float: right;*/
+	float: left;
+  text-align: center;
+	/*width: 21%;*/
+	max-width: 250px
+  /*padding-bottom: 10px;*/
+  /*background-color:#858585;*/
+  /*border:2px solid #000000;*/
+	
+}	
+
+div.img img
+{
+  display: inline;
+  /*margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;*/
+  border: 1px solid #ffffff;
+}
+div.img a:hover img {border: 1px solid #0000ff;}
+
+#BODY {
+#	MARGIN-TOP: 40px; 
+#/*FONT-SIZE: 11px; */
+#
+#FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+#MARGIN-LEFT: 80px; 
+#BACKGROUND-COLOR: #000000
+
+#}

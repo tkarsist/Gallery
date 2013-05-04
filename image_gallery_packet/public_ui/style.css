@@ -1,0 +1,86 @@
+BODY {
+	MARGIN-TOP: 40px; 
+/*FONT-SIZE: 11px; */
+
+FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+MARGIN-LEFT: 80px; 
+BACKGROUND-COLOR: #000000
+
+}
+TD {
+	FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+P {
+	BACKGROUND: black
+}
+H1 {
+	FONT-SIZE: 12px; COLOR: #979797; FONT-FAMILY: Helvetica, Verdana, Arial
+}
+/*A:hover {
+	COLOR: #804c4c; BACKGROUND-COLOR: #f0efe3
+}*/
+H2 {
+	FONT-SIZE: 10px; COLOR: #ffffff; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+H3 {
+	FONT-SIZE: 18px; COLOR: #ffffff; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+
+.bodytext{
+color: #FFFFFF;
+  font-weight: bold;
+  margin: 2px;
+FONT-SIZE: 12px;
+}
+
+.texttop {
+	FONT-SIZE: 28px; 
+	COLOR: #ffffff; 
+	
+}
+.textreg {
+	FONT-SIZE: 12px; COLOR: #999999; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+
+
+.test{
+display:inline;
+list-style-type: none;
+  border: 1px solid #0000ff;
+}
+
+div.img
+{
+  margin: 10px;
+
+
+  height: auto;
+  width: auto;
+  /*float: right;*/
+	float: left;
+  text-align: center;
+	width: 250px;	
+  padding-bottom: 40px;
+	
+}	
+
+div.img img
+{
+  display: inline;
+  /*margin-top: 10px;*/
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border: 1px solid #ffffff;
+}
+div.img a:hover img {border: 1px solid #0000ff;}
+
+div.desc
+{
+  text-align: center;
+  font-weight: bold;
+  width: 100%;
+  margin: 2px;
+FONT-SIZE: 12px;
+COLOR: #FFFFFF; 
+}

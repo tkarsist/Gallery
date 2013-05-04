@@ -1,0 +1,77 @@
+<?php
+session_start();
+if (!isset($_SESSION['hiiripippeli'])){
+	die();
+}
+?>
+<?php
+include_once ('config_img_mgt.php');
+include_once ($db_functions_file);
+?>
+<?php
+if (isset($_POST['alb_nimi'])) {
+	if (empty($_POST['alb_nimi'])) {
+
+	}
+	else {
+		addOwnAlbum($_POST['alb_nimi'],$_SESSION['hiiripippeli']);
+	}
+}
+if (isset($_POST['Albumit'])) {
+	if (empty($_POST['Albumit'])) {
+		//echo "ei menty";
+	}
+	else {
+		delOwnAlbum($_POST['Albumit'], $_SESSION['hiiripippeli']);
+	}
+}
+
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+<title>Kuvien Luokittelu</title>
+</head>
+
+<BODY>
+<form action="album_mgt.php" method="post"><b>Anna albumin nimi:</b> <input
+	name="alb_nimi" size="40" maxlength="40" type="text">
+<input value="Lisää" type="submit"></form>
+<hr size="1">
+<br>
+<div>
+<form name="Albumi" method="post" action="album_mgt.php"><b>Poista albumi:</b>
+<select name="Albumit" onchange="document.Albumi.submit()">
+<option selected value=""></option>
+<?php
+include_once ($db_functions_file);
+$albumi_lista=listAllOwnAlbums($_SESSION['hiiripippeli']);
+if(isset($albumi_lista)){
+foreach($albumi_lista as $key => $nimi){
+		echo '<option value="'.$nimi.'" >'.$nimi."</option>";
+		
+}
+}
+ ?>
+ </select>
+</form>
+</div>
+<hr size="1">
+
+<div><b> Olemassa olevat albumit: </b><br>
+<?php
+$albumit=listAllOwnAlbums($_SESSION['hiiripippeli']);
+if(isset($albumit)){
+	foreach($albumit as $key => $nimi){
+		echo $nimi."<br>"."\n";
+
+	}
+	}
+?>
+</div>
+</body>
+</html>
+
+

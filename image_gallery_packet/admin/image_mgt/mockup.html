@@ -1,0 +1,118 @@
+<HTML>
+<head>
+<title></title>
+<style type="text/css">
+
+.checked {
+
+ border-style:outset;
+ border-color: red;
+ border-width:5px;
+ height: 100px;
+}
+.unchecked {
+
+ background-color: silver;
+ 
+ 
+ text-decoration: none;
+ 
+}
+</style>
+
+</head>
+<BODY>
+<script language="javascript" type="text/javascript">
+function check(method)
+{
+	var checkboxes = document.getElementsByName("kuvat[]");
+	for(i=0; i < checkboxes.length; i++)
+	{
+		checkboxes[i].checked = method;
+	}
+}
+</script>
+
+<script type="text/javascript">
+    document.write('<a class="button" href="javascript:submitForm(\'formName\');" title="Send">Send</a>');
+    </script>
+    <noscript><input type="submit" name="submit" value="Send" /></noscript>
+
+<script type="text/javascript" language="javascript">
+	function toggleStylishCheckbox(id, value, classOn, classOff) {
+		if (document.getElementById(id+"_val").value != "") {
+			document.getElementById(id+"_val").value = "";
+			document.getElementById(id).className = classOff;
+		} else {
+			document.getElementById(id+"_val").value = value;
+			document.getElementById(id).className = classOn;
+		}
+	}
+</script>	
+
+
+
+
+
+
+
+
+<form action="vertailu.php" method="post"> 
+<table border="2"><tr><td valign="middle" bgcolor="#8bb86b"><br>
+<script type="text/javascript" language="javascript">
+	function toggleStylishCheckbox(id, value, classOn, classOff) {
+		if (document.getElementById(id+"_val").value != "") {
+			document.getElementById(id+"_val").value = "";
+			document.getElementById(id).className = classOff;
+		} else {
+			document.getElementById(id+"_val").value = value;
+			document.getElementById(id).className = classOn;
+		}
+	}
+</script>	
+
+
+
+
+<input type="hidden" name="ref" value="vertailu.php">
+<input type="submit" name="nappi" value="Vertaa">  
+<input type="submit" name="poisto" value="Poista">   
+<input type="submit" name="valmis" value="Valmis">   
+
+<a href="aloita.php"">  Aloita alusta</a><br/>
+  Select: <a href="#" onclick="check(1); return false;">All</a>, <a href="#" onclick="check(0); return false;">None</a><br><br>
+ </td></tr><tr><td><br>
+
+
+
+<input type="checkbox" name="kuvat[]" value="DSC_0769.JPG">
+<a href="detailed_vertailu.php?kuva=DSC_0769.JPG"><img src="DSC_0769.JPG.thumb.jpg"></a>
+<input type="checkbox" name="kuvat[]" value="DSC_0770.JPG">
+
+
+<script type="text/javascript" language="javascript">
+// Write the clickable A tag
+document.write('<a id="checkbox2" href="#" onclick="toggleStylishCheckbox(\'checkbox2\', \'val\', \'checked\', \'unchecked\');" class="unchecked"><img src="DSC_0770.JPG.thumb.jpg"></a>');
+// Write the hidden input tag
+document.write('<input type="hidden" name="checkbox2" id="checkbox2_val" value="" />');
+</script>
+
+
+<a href="detailed_vertailu.php?kuva=DSC_0770.JPG"><img src="DSC_0770.JPG.thumb.jpg"></a>
+<input type="checkbox" name="kuvat[]" value="DSC_0780.JPG">
+<a href="detailed_vertailu.php?kuva=DSC_0780.JPG"><img src="DSC_0780.JPG.thumb.jpg"></a>
+<input type="checkbox" name="kuvat[]" value="DSC_0783.JPG">
+<a href="detailed_vertailu.php?kuva=DSC_0783.JPG"><img src="DSC_0783.JPG.thumb.jpg"></a>
+<input type="checkbox" name="kuvat[]" value="DSC_0784.JPG">
+<a href="detailed_vertailu.php?kuva=DSC_0784.JPG"><img src="DSC_0784.JPG.thumb.jpg"></a>
+<input type="checkbox" name="kuvat[]" value="DSC_0785.JPG">
+<a href="detailed_vertailu.php?kuva=DSC_0785.JPG"><img src="DSC_0785.JPG.thumb.jpg"></a>
+
+
+
+
+</td></tr>
+</table>
+</form>
+</body></html>
+

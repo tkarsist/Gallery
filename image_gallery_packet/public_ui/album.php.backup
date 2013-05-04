@@ -1,0 +1,45 @@
+<?php
+session_start();
+if (isset($_GET['album'])) {
+
+    		$_SESSION['albumi']=$_GET['album'];
+    		include_once('config_pub_ui.php');
+			include_once ($db_functions_file);
+			$_SESSION['kuvat']=listAllImagesInAlbum($_SESSION['albumi']);
+    		
+	}	   
+
+?>
+
+<html> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+<title>Albumit</title> <link rel="stylesheet" href="style.css" type="text/css"> </head> 
+<body bgcolor="#FFFFff" text="#FFFFFF"> 
+<table width="100%">
+<tr><td width="20%" class="texttop">
+<a href="index.php">Paluu</a>
+</td>
+<td class="texttop">
+Albumi --
+<?php
+echo $_SESSION['albumi'];
+?>
+</td>
+</tr>
+</table>
+<hr size="1">
+
+<?php
+
+foreach ($_SESSION['kuvat'] as $key =>$nimi){
+
+		echo '<div class="img">';
+		echo '<a href="album_det.php?image='.$nimi.'"'.$nimi.'""><img align="center" src="/processed/thumb/'.$nimi.'.thumb.jpg" title="dsc_1135.jpg" border="0"></a>';
+		echo '</div>';
+	}
+
+?>
+
+
+
+</body>
+</html>
